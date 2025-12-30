@@ -1,61 +1,68 @@
 <script setup lang="ts">
-import { eachDayOfInterval, eachWeekOfInterval, eachMonthOfInterval, format } from 'date-fns'
-import { VisXYContainer, VisLine, VisAxis, VisArea, VisCrosshair, VisTooltip } from '@unovis/vue'
-import type { Period, Range } from '~/types'
+import { eachDayOfInterval, eachWeekOfInterval, eachMonthOfInterval, format } from 'date-fns';
+import { VisXYContainer, VisLine, VisAxis, VisArea, VisCrosshair, VisTooltip } from '@unovis/vue';
+import type { Period, Range } from '~/types';
 
-const cardRef = useTemplateRef<HTMLElement | null>('cardRef')
+const cardRef = useTemplateRef<HTMLElement | null>('cardRef');
 
 const props = defineProps<{
-  period: Period
-  range: Range
-}>()
+  period: Period;
+  range: Range;
+}>();
 
 type DataRecord = {
-  date: Date
-  amount: number
-}
+  date: Date;
+  amount: number;
+};
 
-const { width } = useElementSize(cardRef)
+const { width } = useElementSize(cardRef);
 
-const data = ref<DataRecord[]>([])
+const data = ref<DataRecord[]>([]);
 
-watch([() => props.period, () => props.range], () => {
-  const dates = ({
-    daily: eachDayOfInterval,
-    weekly: eachWeekOfInterval,
-    monthly: eachMonthOfInterval
-  } as Record<Period, typeof eachDayOfInterval>)[props.period](props.range)
+watch(
+  [() => props.period, () => props.range],
+  () => {
+    const dates = (
+      {
+        daily: eachDayOfInterval,
+        weekly: eachWeekOfInterval,
+        monthly: eachMonthOfInterval,
+      } as Record<Period, typeof eachDayOfInterval>
+    )[props.period](props.range);
 
-  const min = 1000
-  const max = 10000
+    const min = 1000;
+    const max = 10000;
 
-  data.value = dates.map(date => ({ date, amount: Math.floor(Math.random() * (max - min + 1)) + min }))
-}, { immediate: true })
+    data.value = dates.map((date) => ({ date, amount: Math.floor(Math.random() * (max - min + 1)) + min }));
+  },
+  { immediate: true },
+);
 
-const x = (_: DataRecord, i: number) => i
-const y = (d: DataRecord) => d.amount
+const x = (_: DataRecord, i: number) => i;
+const y = (d: DataRecord) => d.amount;
 
-const total = computed(() => data.value.reduce((acc: number, { amount }) => acc + amount, 0))
+const total = computed(() => data.value.reduce((acc: number, { amount }) => acc + amount, 0));
 
-const formatNumber = new Intl.NumberFormat('en', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format
+const formatNumber = new Intl.NumberFormat('en', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 })
+  .format;
 
 const formatDate = (date: Date): string => {
-  return ({
+  return {
     daily: format(date, 'd MMM'),
     weekly: format(date, 'd MMM'),
-    monthly: format(date, 'MMM yyy')
-  })[props.period]
-}
+    monthly: format(date, 'MMM yyy'),
+  }[props.period];
+};
 
 const xTicks = (i: number) => {
   if (i === 0 || i === data.value.length - 1 || !data.value[i]) {
-    return ''
+    return '';
   }
 
-  return formatDate(data.value[i].date)
-}
+  return formatDate(data.value[i].date);
+};
 
-const template = (d: DataRecord) => `${formatDate(d.date)}: ${formatNumber(d.amount)}`
+const template = (d: DataRecord) => `${formatDate(d.date)}: ${formatNumber(d.amount)}`;
 </script>
 
 <template>
