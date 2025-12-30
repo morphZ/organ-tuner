@@ -1,68 +1,65 @@
 {
-	// ---------- General editor behavior ----------
-	"editor.formatOnSave": true,
-	"editor.tabSize": 2,
-	"editor.insertSpaces": true,
-	"files.eol": "\n",
-	// Use Biome as the default formatter
-	"editor.defaultFormatter": "biomejs.biome",
-	// Per-language formatter settings
-	"[javascript]": {
-		"editor.defaultFormatter": "biomejs.biome"
-	},
-	"[typescript]": {
-		"editor.defaultFormatter": "biomejs.biome"
-	},
-	"[vue]": {
-		"editor.defaultFormatter": "biomejs.biome"
-	},
-	"[json]": {
-		"editor.defaultFormatter": "biomejs.biome"
-	},
-	"[jsonc]": {
-		"editor.defaultFormatter": "biomejs.biome"
-	},
-	// Make Biome drive code actions (organize imports, fixAll)
-	"biome.enabled": true,
-	"biome.requireConfiguration": true,
-	"biome.configurationPath": "biome.json",
-	"editor.codeActionsOnSave": {
-		"source.fixAll.biome": "explicit",
-		"source.organizeImports.biome": "explicit"
-	},
-	// Disable other formatters if installed
-	"prettier.enable": false,
-	"eslint.enable": false,
-	// ---------- Vue / Nuxt (Volar) ----------
-	"vue.features.codeActions.enable": true,
-	"vue.features.updateImportsOnFileMove": true,
-	"vue.server.hybridMode": true,
-	"typescript.tsserver.maxTsServerMemory": 4096,
-	// For Nuxt/Volar TS support inside .vue files
-	"typescript.preferences.importModuleSpecifier": "non-relative",
-	"javascript.preferences.importModuleSpecifier": "non-relative",
-	// ---------- Vitest ----------
-	// Vitest extension / auto-detection of tests
-	"vitest.enable": true,
-	"vitest.commandLine": "pnpm vitest",
-	"vitest.testFilePattern": [
-		"**/__tests__/**/*.{test,spec}.{js,ts,jsx,tsx}",
-		"**/*.{test,spec}.{js,ts,jsx,tsx}"
-	],
-	// ---------- Terminal & pnpm ----------
-	"terminal.integrated.defaultProfile.linux": "bash",
-	"npm.packageManager": "pnpm",
-	// ---------- Files to exclude from search / explorer ----------
-	"files.exclude": {
-		"**/.nuxt": true,
-		"**/.output": true,
-		"**/node_modules": true,
-		"**/.turbo": true,
-		"**/.git": true
-	},
-	"search.exclude": {
-		"**/.nuxt": true,
-		"**/.output": true,
-		"**/node_modules": true
-	}
+  // ---------- General editor behavior ----------
+  "editor.formatOnSave": true,
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "files.eol": "\n",
+  // Use Biome as the default formatter
+  "editor.defaultFormatter": "biomejs.biome",
+  // Per-language formatter settings
+  "[javascript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[vue]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  // Make Biome drive code actions (organize imports, fixAll)
+  "biome.enabled": true,
+  "biome.requireConfiguration": true,
+  "biome.configurationPath": "biome.json",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.biome": "explicit",
+    "source.organizeImports.biome": "explicit"
+  },
+  // Disable other formatters if installed
+  "prettier.enable": false,
+  "eslint.enable": false,
+  // ---------- Vue / Nuxt (Volar) ----------
+  "vue.features.codeActions.enable": true,
+  "vue.features.updateImportsOnFileMove": true,
+  "vue.server.hybridMode": true,
+  "typescript.tsserver.maxTsServerMemory": 4096,
+  // For Nuxt/Volar TS support inside .vue files
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "javascript.preferences.importModuleSpecifier": "non-relative",
+  // ---------- Vitest ----------
+  // Vitest extension / auto-detection of tests
+  "vitest.enable": true,
+  "vitest.commandLine": "pnpm vitest",
+  "vitest.testFilePattern": ["**/__tests__/**/*.{test,spec}.{js,ts,jsx,tsx}", "**/*.{test,spec}.{js,ts,jsx,tsx}"],
+  // ---------- Terminal & pnpm ----------
+  "terminal.integrated.defaultProfile.linux": "bash",
+  "npm.packageManager": "pnpm",
+  // ---------- Files to exclude from search / explorer ----------
+  "files.exclude": {
+    "**/.nuxt": true,
+    "**/.output": true,
+    "**/node_modules": true,
+    "**/.turbo": true,
+    "**/.git": true
+  },
+  "search.exclude": {
+    "**/.nuxt": true,
+    "**/.output": true,
+    "**/node_modules": true
+  }
 }

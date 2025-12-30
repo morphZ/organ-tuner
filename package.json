@@ -1,31 +1,30 @@
 {
-	"name": "tuner",
-	"private": true,
-	"type": "module",
-	"scripts": {
-		"build": "nuxt build",
-		"dev": "nuxt dev",
-		"preview": "nuxt preview",
-		"postinstall": "nuxt prepare",
-		"lint": "biome check .",
-		"format": "biome format .",
-		"typecheck": "nuxt typecheck"
-	},
-	"dependencies": {
-		"@iconify-json/lucide": "^1.2.82",
-		"@iconify-json/simple-icons": "^1.2.63",
-		"@nuxt/ui": "^4.3.0",
-		"nuxt": "^4.2.2"
-	},
-	"devDependencies": {
-		"@biomejs/biome": "^2.3.10",
-		"@nuxt/eslint": "^1.12.1",
-		"@nuxt/test-utils": "^3.21.0",
-		"@oxc-parser/binding-linux-x64-gnu": "^0.106.0",
-		"eslint": "^9.39.2",
-		"typescript": "^5.9.3",
-		"vitest": "^4.0.16",
-		"vue-tsc": "^3.2.1"
-	},
-	"packageManager": "pnpm@10.26.1"
+  "name": "tuner",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "lint": "biome check .",
+    "lint:fix": "biome check --apply .",
+    "format": "biome format --write .",
+    "typecheck": "nuxt typecheck"
+  },
+  "dependencies": {
+    "@iconify-json/lucide": "^1.2.82",
+    "@iconify-json/simple-icons": "^1.2.63",
+    "@nuxt/ui": "^4.3.0",
+    "nuxt": "^4.2.2"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.3.10",
+    "@nuxt/test-utils": "^3.21.0",
+    "@oxc-parser/binding-linux-x64-gnu": "^0.106.0",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.16",
+    "vue-tsc": "^3.2.1"
+  },
+  "packageManager": "pnpm@10.26.1"
 }
