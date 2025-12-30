@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { DateFormatter, getLocalTimeZone, CalendarDate, today } from '@internationalized/date';
+import { CalendarDate, DateFormatter, getLocalTimeZone, today } from '@internationalized/date';
 import type { Range } from '~/types';
 
 const df = new DateFormatter('en-US', {

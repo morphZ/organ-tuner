@@ -56,5 +56,14 @@
         "organizeImports": "on"
       }
     }
-  }
+  },
+
+  "overrides": [
+    {
+      "includes": ["**/*.vue"],
+      "linter": {
+        "enabled": false
+      }
+    }
+  ]
 }

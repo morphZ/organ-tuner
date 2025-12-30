@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { sub } from 'date-fns';
 import type { DropdownMenuItem } from '@nuxt/ui';
+import { sub } from 'date-fns';
 import type { Period, Range } from '~/types';
 
 const { isNotificationsSlideoverOpen } = useDashboard();

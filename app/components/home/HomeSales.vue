@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { h, resolveComponent } from 'vue';
 import type { TableColumn } from '@nuxt/ui';
+import { h, resolveComponent } from 'vue';
 import type { Period, Range, Sale } from '~/types';
 
 const props = defineProps<{
