@@ -295,3 +295,114 @@ For UI:
 > - `composables/` as bridges between core and UI (stateful).
 > - `components/` and `pages/` as pure presentation using composables.
 > - A short dependency rule: components → composables → core, never the other way around.
+
+---
+
+## Detailed implementation plan & tracking
+
+This section turns the high-level steps above into an actionable checklist with file paths, acceptance criteria, and small sub-tasks so progress is easy to track. Each step is intentionally minimal so we can iterate safely.
+
+Step 1 — Core: `Note` and types (pure TS)
+- Files to add:
+  - `app/core/notes/Note.ts`
+  - `app/core/tuning/types.ts`
+- Subtasks:
+  - Implement `Note` class: constructor(name, octave), validate allowed names and octave range (1–6).
+  - Methods: `toMidi(): number`, `toSpecifier(): string`, `static fromSpecifier(spec: string): Note`.
+  - Export types in `types.ts`: `TemperamentId`, `TuningMode`, `TemperamentTable`.
+- Acceptance: All code is framework-agnostic (no Vue imports). Unit tests later assert MIDI/specifier conversions.
+
+Step 2 — Temperaments & workflow (pure TS)
+- Files to add:
+  - `app/core/tuning/Temperaments.ts`
+  - `app/core/tuning/TuningWorkflow.ts`
+- Subtasks:
+  - Provide `EQUAL_TEMPERAMENT` table computed from MIDI → Hz (A4=440).
+  - Stub `WERCKMEISTER_III` and `MEANTONE` as copies of equal (TODO to replace later).
+  - Implement `TuningWorkflow` with `getReferenceHz(note)` and `computeCentsDeviation(note, measuredHz)`.
+- Acceptance: `computeCentsDeviation` returns expected numeric results for known inputs (tested in Step 9).
+
+Step 3 — `useTuning` composable (bridge)
+- File to add:
+  - `app/composables/useTuning.ts`
+- Subtasks:
+  - Expose `currentNote`, `temperament`, `mode`, `referenceNote`, `measuredHz` as `ref`s.
+  - Provide `pitchCents` as `computed` using `TuningWorkflow`.
+  - Add navigation helpers: `nextNote`, `prevNote`, `nextOctave`, `prevOctave` (clamped 1–6).
+  - Keep composable free of DOM/audio APIs.
+- Acceptance: Composable can be imported and used in a page to read reactive values.
+
+Step 4 — Page wiring (`pages/index.vue`)
+- File to edit:
+  - `app/pages/index.vue`
+- Subtasks:
+  - Use `<script setup lang="ts">` and call `useTuning()`.
+  - Render note specifier, nav buttons, and a text pitch display (dummy `measuredHz` initially).
+  - Insert `PitchDisplay` and `TuningNavigation` later.
+- Acceptance: Page renders without runtime errors in dev (static values visible).
+
+Step 5 — `PitchDisplay` component
+- File to add:
+  - `app/components/tuning/PitchDisplay.vue`
+- Subtasks:
+  - Consume `useTuning()` and display `pitchCents` with basic color logic near zero.
+  - Keep stateless.
+- Acceptance: Visual indicator updates when `pitchCents` changes.
+
+Step 6 — `TuningNavigation` component
+- File to add:
+  - `app/components/tuning/TuningNavigation.vue`
+- Subtasks:
+  - Render prev/next note and octave buttons using project UI kit or plain buttons.
+  - Consume composable helpers to perform navigation.
+- Acceptance: Buttons update `currentNote` in `useTuning`.
+
+Step 7 — Mode & Temperament selectors
+- Files to add:
+  - `app/components/tuning/TuningModeSelector.vue`
+  - `app/components/tuning/TemperamentSelector.vue`
+- Subtasks:
+  - Bind UI selects/radios to `mode` and `temperament` refs from `useTuning()`.
+- Acceptance: Changing selectors updates the workflow computed value.
+
+Step 8 — Audio composable and worklet placeholder
+- Files to add:
+  - `app/composables/useAudioPitch.ts`
+  - `public/pitch-processor.js` (placeholder Worklet)
+- Subtasks:
+  - Provide `hz` ref and `start()`/`stop()` functions (mocked Hz initially).
+  - Document how to wire a real AudioWorklet later.
+- Acceptance: `hz` is reactive and can be watched; integration with `useTuning` shows changes in UI.
+
+Step 9 — Core tests (Vitest)
+- Files to add:
+  - `app/core/notes/Note.test.ts`
+  - `app/core/tuning/TuningWorkflow.test.ts`
+- Subtasks:
+  - Assert `toMidi()` / `fromSpecifier()` behavior and cents math.
+  - Keep tests pure TS (no DOM).
+- Acceptance: Tests run via `pnpm test` (adjust Vitest config if necessary).
+
+Step 10 — Relative mode refinements
+- Files to update:
+  - `app/core/tuning/TuningWorkflow.ts`
+  - `app/composables/useTuning.ts`
+- Subtasks:
+  - Ensure `relative` mode requires `referenceNote` and uses it to compute reference Hz.
+  - Add `setReferenceNote` helper in composable and a page button to set it from `currentNote`.
+- Acceptance: Relative mode computes deviations relative to chosen reference note.
+
+Step 11 — Architecture doc
+- File to add:
+  - `app/ARCHITECTURE.md`
+- Subtasks:
+  - Describe the dependency rule and placement of core/composables/components.
+  - Add a short diagram and examples of import paths.
+- Acceptance: Developer-facing doc present in `app/`.
+
+Tracking & workflow notes
+- Work in small commits per step; run TypeScript checks and Vitest after adding core files.
+- Verify editor/IDE resolves `~/core/...` imports; if not, add tsconfig paths or rely on Nuxt generated config.
+- Audio worklet and microphone usage must be tested in browser — prepare stubbed implementations for local dev.
+
+If you want, I can start implementing Step 1 now (create `Note.ts` and `types.ts`) and mark it in the todo list as in-progress. Reply with "start step 1" to begin, or tell me which step to start with.
