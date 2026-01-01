@@ -1,4 +1,4 @@
-import { computed, type Ref, ref } from 'vue';
+import { computed, ref } from 'vue';
 import Note from '~/core/notes/Note';
 import TuningWorkflow from '~/core/tuning/TuningWorkflow';
 import type { TemperamentId, TuningMode } from '~/core/tuning/types';

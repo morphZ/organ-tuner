@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import type { DropdownMenuItem } from '@nuxt/ui';
 import { sub } from 'date-fns';
+import PitchDisplay from '~/components/tuning/PitchDisplay.vue';
+import TuningNavigation from '~/components/tuning/TuningNavigation.vue';
+import useTuning from '~/composables/useTuning';
 import type { Period, Range } from '~/types';
 
 const { isNotificationsSlideoverOpen } = useDashboard();
@@ -25,6 +28,9 @@ const range = shallowRef<Range>({
   end: new Date(),
 });
 const period = ref<Period>('daily');
+const tuning = useTuning();
+// temporary dummy measured Hz until audio is wired
+tuning.measuredHz.value = 440;
 </script>
 
 <template>
@@ -69,6 +75,13 @@ const period = ref<Period>('daily');
       <HomeStats :period="period" :range="range" />
       <HomeChart :period="period" :range="range" />
       <HomeSales :period="period" :range="range" />
+      <section class="mt-8">
+        <h3 class="text-lg font-medium mb-2">Tuner</h3>
+        <div class="flex items-center gap-4">
+          <TuningNavigation />
+          <PitchDisplay />
+        </div>
+      </section>
     </template>
   </UDashboardPanel>
 </template>
