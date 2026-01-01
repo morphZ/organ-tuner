@@ -10,7 +10,8 @@
     "lint": "biome check .",
     "lint:fix": "biome check --apply .",
     "format": "biome format --write .",
-    "typecheck": "nuxt typecheck"
+    "typecheck": "nuxt typecheck",
+    "test": "vitest run"
   },
   "dependencies": {
     "@iconify-json/lucide": "^1.2.82",

@@ -31,21 +31,11 @@
     "source.organizeImports.biome": "explicit"
   },
   // Disable other formatters if installed
-  "prettier.enable": false,
   "eslint.enable": false,
-  // ---------- Vue / Nuxt (Volar) ----------
-  "vue.features.codeActions.enable": true,
-  "vue.features.updateImportsOnFileMove": true,
-  "vue.server.hybridMode": true,
   "typescript.tsserver.maxTsServerMemory": 4096,
   // For Nuxt/Volar TS support inside .vue files
   "typescript.preferences.importModuleSpecifier": "non-relative",
   "javascript.preferences.importModuleSpecifier": "non-relative",
-  // ---------- Vitest ----------
-  // Vitest extension / auto-detection of tests
-  "vitest.enable": true,
-  "vitest.commandLine": "pnpm vitest",
-  "vitest.testFilePattern": ["**/__tests__/**/*.{test,spec}.{js,ts,jsx,tsx}", "**/*.{test,spec}.{js,ts,jsx,tsx}"],
   // ---------- Terminal & pnpm ----------
   "terminal.integrated.defaultProfile.linux": "bash",
   "npm.packageManager": "pnpm",
@@ -53,7 +43,6 @@
   "files.exclude": {
     "**/.nuxt": true,
     "**/.output": true,
-    "**/node_modules": true,
     "**/.turbo": true,
     "**/.git": true
   },

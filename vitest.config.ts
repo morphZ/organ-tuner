@@ -3,6 +3,6 @@ import { defineVitestConfig } from '@nuxt/test-utils/config';
 export default defineVitestConfig({
   test: {
     environment: 'nuxt',
-    dir: 'tests',
+    include: ['app/**/*.{test,spec}.?(c|m)[jt]s?(x)', 'tests/**/*.{test,spec}.?(c|m)[jt]s?(x)'],
   },
 });
