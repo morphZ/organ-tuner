@@ -7,15 +7,15 @@ const { currentNote, nextNote, prevNote, nextOctave, prevOctave } = useTuning();
 <template>
   <div class="flex items-center gap-3">
     <div class="flex gap-1">
-      <button class="px-3 py-1 border rounded" @click="prevNote">◀</button>
-      <button class="px-3 py-1 border rounded" @click="nextNote">▶</button>
+      <UButton size="sm" @click="prevNote">◀</UButton>
+      <UButton size="sm" @click="nextNote">▶</UButton>
     </div>
 
     <div class="px-4 py-2 border rounded">{{ currentNote.toSpecifier() }}</div>
 
     <div class="flex gap-1">
-      <button class="px-3 py-1 border rounded" @click="prevOctave">-</button>
-      <button class="px-3 py-1 border rounded" @click="nextOctave">+</button>
+      <UButton size="sm" @click="prevOctave">-</UButton>
+      <UButton size="sm" @click="nextOctave">+</UButton>
     </div>
   </div>
 </template>
