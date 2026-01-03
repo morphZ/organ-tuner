@@ -2,6 +2,8 @@
 import type { DropdownMenuItem } from '@nuxt/ui';
 import { sub } from 'date-fns';
 import PitchDisplay from '~/components/tuning/PitchDisplay.vue';
+import TemperamentSelector from '~/components/tuning/TemperamentSelector.vue';
+import TuningModeSelector from '~/components/tuning/TuningModeSelector.vue';
 import TuningNavigation from '~/components/tuning/TuningNavigation.vue';
 import useTuning from '~/composables/useTuning';
 import type { Period, Range } from '~/types';
@@ -80,6 +82,25 @@ tuning.measuredHz.value = 440;
         <div class="flex items-center gap-4">
           <TuningNavigation />
           <PitchDisplay />
+          <div class="flex flex-col gap-2">
+            <TuningModeSelector />
+            <TemperamentSelector />
+            <div class="flex gap-2 items-center">
+              <button
+                class="px-3 py-1 border rounded bg-neutral-50"
+                @click="tuning.setReferenceNote(tuning.currentNote)"
+              >
+                Set reference
+              </button>
+              <button
+                class="px-3 py-1 border rounded bg-neutral-50"
+                @click="tuning.setReferenceNote(null)"
+              >
+                Clear reference
+              </button>
+            </div>
+            <div class="text-sm text-slate-500">Ref: {{ tuning.referenceNote ? tuning.referenceNote.toSpecifier() : '—' }}</div>
+          </div>
         </div>
       </section>
     </template>

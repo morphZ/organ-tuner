@@ -4,10 +4,7 @@ import useTuning from '~/composables/useTuning';
 
 const { pitchCents } = useTuning();
 
-const display = computed(() => {
-  if (pitchCents.value == null) return '—';
-  return `${pitchCents.value.toFixed(1)} ct`;
-});
+const display = computed(() => (pitchCents.value == null ? '—' : `${pitchCents.value.toFixed(1)} ct`));
 
 const color = computed(() => {
   const c = pitchCents.value ?? 9999;
