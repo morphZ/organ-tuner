@@ -15,6 +15,9 @@ export class TuningWorkflow {
   public getReferenceHz(note: Note): number {
     if (this.mode === 'absolute') {
       const table = TEMPERAMENT_MAP[this.temperament];
+      if (!table) {
+        throw new Error(`Temperament table not found for ${this.temperament}`);
+      }
       const midi = note.toMidi();
       const hz = table[midi];
       if (typeof hz !== 'number') {

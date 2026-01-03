@@ -1,16 +1,20 @@
 <script setup lang="ts">
-import useTuning from '~/composables/useTuning';
+import type { TemperamentId } from '~/core/tuning/types';
 
-const { temperament } = useTuning();
+const model = defineModel<TemperamentId>({ required: true });
+
+const items: string[] = ['equal', 'werckmeister3', 'meantone'];
 </script>
 
 <template>
   <div class="flex items-center gap-2">
     <label class="text-sm text-slate-500">Temperament</label>
-    <select v-model="temperament" class="px-2 py-1 border rounded">
-      <option value="equal">Equal</option>
-      <option value="werckmeister3">Werckmeister III</option>
-      <option value="meantone">Meantone</option>
-    </select>
+    <USelect
+      v-model="model"
+      :items="items"
+      variant="ghost"
+      class="w-40"
+      :ui="{ value: 'capitalize', itemLabel: 'capitalize' }"
+    />
   </div>
 </template>

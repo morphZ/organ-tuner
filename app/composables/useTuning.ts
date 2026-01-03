@@ -27,14 +27,14 @@ export function useTuning() {
     const names = Note.ALLOWED_NAMES;
     const idx = names.indexOf(currentNote.value.name);
     const nextIdx = (idx + 1) % names.length;
-    currentNote.value = new Note(names[nextIdx], currentNote.value.octave);
+    currentNote.value = new Note(names[nextIdx]!, currentNote.value.octave);
   }
 
   function prevNote() {
     const names = Note.ALLOWED_NAMES;
     const idx = names.indexOf(currentNote.value.name);
     const prevIdx = (idx - 1 + names.length) % names.length;
-    currentNote.value = new Note(names[prevIdx], currentNote.value.octave);
+    currentNote.value = new Note(names[prevIdx]!, currentNote.value.octave);
   }
 
   function nextOctave() {
