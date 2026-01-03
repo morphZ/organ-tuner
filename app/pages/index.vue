@@ -33,6 +33,13 @@ const period = ref<Period>('daily');
 const tuning = useTuning();
 // temporary dummy measured Hz until audio is wired
 tuning.measuredHz.value = 440;
+const referenceLabel = computed(() => {
+  const refNote = tuning.referenceNote;
+  // `tuning` is an object; its nested refs are not auto-unwrapped in template context.
+  // Unwrap safely here for display.
+  const note = refNote && typeof refNote === 'object' && 'value' in refNote ? refNote.value : refNote;
+  return note ? note.toSpecifier() : '—';
+});
 </script>
 
 <template>
@@ -99,7 +106,7 @@ tuning.measuredHz.value = 440;
                 Clear reference
               </button>
             </div>
-            <div class="text-sm text-slate-500">Ref: {{ tuning.referenceNote ? tuning.referenceNote.toSpecifier() : '—' }}</div>
+            <div class="text-sm text-slate-500">Ref: {{ referenceLabel }}</div>
           </div>
         </div>
       </section>
